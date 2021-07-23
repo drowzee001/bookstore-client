@@ -1,0 +1,40 @@
+<app-nav class="nav" [admin]="currentUser.admin"></app-nav>
+
+<div class="container">
+  <header>
+    <h1>Add User</h1>
+  </header>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-control">
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        name="firstName"
+        [(ngModel)]="firstName"
+        id="lastName"
+      />
+    </div>
+    <div class="form-control">
+      <label for="lastName">Last Name</label>
+      <input type="text" name="lastName" [(ngModel)]="lastName" id="lastName" />
+    </div>
+    <div class="form-control">
+      <label for="email">Email</label>
+      <input type="email" name="email" [(ngModel)]="email" id="email" />
+    </div>
+    <div class="form-control">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        id="password"
+      />
+    </div>
+    <div class="form-control admin">
+      <label for="admin">Admin</label>
+      <input type="checkbox" name="admin" [(ngModel)]="admin" id="admin" />
+    </div>
+    <input type="submit" value="{{submitValue}}" />
+  </form>
+</div>

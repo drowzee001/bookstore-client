@@ -1,0 +1,14 @@
+header {
+    text-align: left;
+    flex-direction: column;
+}
+h1 {
+    padding-bottom: 50px;
+}
+p {
+    padding: 15px;
+}
+button {
+    margin: 100px;
+    width: 50%;
+}

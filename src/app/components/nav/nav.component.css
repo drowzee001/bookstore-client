@@ -1,0 +1,20 @@
+.navbar {
+  background-color: #001b3a;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+ul {
+  display: flex;
+  list-style-type: none;
+}
+li {
+  margin: 0 20px;
+}
+a {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}

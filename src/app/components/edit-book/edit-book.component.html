@@ -1,0 +1,99 @@
+<app-nav class="nav" [admin]="currentUser.admin"></app-nav>
+<div class="container" *ngIf="!loading">
+  <header>
+    <h1>Update Book</h1>
+  </header>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-control">
+      <label for="title">Title</label>
+      <div class="sub-group">
+        <input
+          #title
+          type="text"
+          [(ngModel)]="book.title"
+          name="title"
+          id="title"
+          disabled
+        />
+        <fa-icon
+          [icon]="faEdit"
+          (click)="title.disabled = !title.disabled"
+        ></fa-icon>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="author">Author</label>
+      <div class="sub-group">
+        <input
+          #author
+          type="text"
+          name="author"
+          [(ngModel)]="book.author"
+          id="author"
+          disabled
+        />
+        <fa-icon
+          [icon]="faEdit"
+          (click)="author.disabled = !author.disabled"
+        ></fa-icon>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="description">Description</label>
+      <div class="sub-group">
+        <textarea
+          #description
+          type="text"
+          name="description"
+          [(ngModel)]="book.description"
+          id="description"
+          cols="30"
+          rows="10"
+          disabled
+        ></textarea>
+        <fa-icon
+          [icon]="faEdit"
+          (click)="description.disabled = !description.disabled"
+        ></fa-icon>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="price">Price</label>
+      <div class="sub-group">
+        <input
+          #price
+          type="text"
+          name="price"
+          [(ngModel)]="book.price"
+          id="price"
+          disabled
+        />
+        <fa-icon
+          [icon]="faEdit"
+          (click)="price.disabled = !price.disabled"
+        ></fa-icon>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="image">Image</label>
+      <img
+        [src]="book.img"
+        [ngStyle]="{ 'background-color': imageDisabled ? 'grey' : 'white' }"
+      />
+      <div class="sub-group">
+        <input
+          #image
+          type="file"
+          name="image"
+          id="image"
+          accept="image/*"
+          (change)="onSelectFile($event)"
+          disabled
+        />
+        <fa-icon [icon]="faEdit" (click)="imageToggle(image)"></fa-icon>
+      </div>
+      <p *ngIf="filesize">File Size: {{ filesize }}</p>
+    </div>
+    <input type="submit" value="{{ submitValue }}" />
+  </form>
+</div>

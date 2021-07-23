@@ -1,0 +1,32 @@
+<app-nav class="nav" [admin]="currentUser.admin"></app-nav>
+<div class="message" *ngIf="message">
+  <p>{{ message }}</p>
+</div>
+<div class="container" *ngIf="!loading">
+  <h1>{{ book.title }}</h1>
+  <h2>{{ book.author }}</h2>
+  <img src="{{ book.img }}" alt="" *ngIf="book.img" />
+  <fa-icon [icon]="faFileImage" *ngIf="!book.img"></fa-icon>
+  <p><strong>Description</strong></p>
+  <p>{{ book.description }}</p>
+  <p>
+    <strong>${{ book.price }}</strong>
+  </p>
+  <div class="select" *ngIf="!currentUser.admin">
+    <fa-icon [icon]="faMinus" (click)="minusClick()"></fa-icon>
+    <input
+      disabled
+      name="quantity"
+      id="quantity"
+      [(ngModel)]="quantity"
+      min="1"
+      max="15"
+    />
+    <fa-icon [icon]="faPlus" (click)="plusClick()"></fa-icon>
+  </div>
+  <button (click)="addCartClick($event.target)" *ngIf="!currentUser.admin">
+    Add to Cart</button
+  ><button routerLink="/editBook/{{ book._id }}" *ngIf="currentUser.admin">
+    Edit Book
+  </button>
+</div>

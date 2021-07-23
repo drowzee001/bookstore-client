@@ -1,0 +1,16 @@
+input {
+  width: 50px;
+  text-align: center;
+  outline: 0;
+}
+.select {
+  display: flex;
+  align-items: center;
+  margin: 0px 15px;
+}
+.select input {
+  margin: 0 25px;
+}
+.select fa-icon {
+  cursor: pointer;
+}

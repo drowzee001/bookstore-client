@@ -1,0 +1,39 @@
+input {
+  width: 100px;
+  text-align: center;
+  outline: 0;
+}
+.select {
+  display: flex;
+  align-items: center;
+  margin: 50px;
+}
+.select input {
+  margin: 0 25px;
+}
+.select fa-icon {
+  cursor: pointer;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 50px;
+}
+h1 {
+  padding: 75px 0 25px 0;
+}
+img {
+  height: 500px;
+  padding: 50px;
+}
+strong {
+  font-size: 25px;
+}
+p {
+  padding: 25px;
+}
+button {
+    margin: 25px;
+    cursor: pointer;
+}

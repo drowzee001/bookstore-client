@@ -1,0 +1,135 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  overscroll-behavior: none;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 20px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: white;
+  border: 5px solid rgba(0, 0, 0, 0);
+  border-radius: 9999px;
+  background-clip: padding-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  height: 100%;
+  background-color: #00316e;
+  overflow: overlay;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+.container {
+  color: white;
+  text-align: center;
+  padding-top: 10vh;
+  max-width: 1500px;
+  margin: auto;
+}
+.nav {
+  position: fixed;
+  left: 0;
+  width: 100%;
+}
+.message {
+  position: fixed;
+  top: 125px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  color: white;
+  animation: fade-out 0.5s ease-out 1s forwards 1;
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.message p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00224b;
+  border-radius: 25px;
+  width: 500px;
+  height: 100px;
+  padding: 0 15px;
+  text-align: center;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 50px;
+  padding: 50px 0;
+}
+input,
+button {
+  border-radius: 25px;
+  border: none;
+  background-color: white;
+  padding: 10px;
+}
+button:active {
+  box-shadow: 0px 0px 15px 0px black inset;
+}
+table {
+  padding: 0 50px 50px 50px;
+  width: 100%;
+  border-spacing: 0;
+  text-align: center;
+}
+thead {
+  background-color: #00224b;
+}
+tr {
+  height: 100px;
+}
+tr:nth-of-type(2n) {
+  background-color: #001c57;
+}
+th,
+td {
+  padding: 15px;
+}
+.icon {
+  font-size: 30px;
+  cursor: pointer;
+}
+img {
+  height: 150px;
+  object-fit: contain;
+}
+.default {
+  font-size: 125px;
+}
+button {
+  padding: 15px;
+  font-weight: bold;
+  font-size: 25px;
+}

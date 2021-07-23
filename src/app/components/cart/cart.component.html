@@ -1,0 +1,61 @@
+<app-nav class="nav" [admin]="currentUser.admin"></app-nav>
+<div class="container" *ngIf="!loading">
+  <header>
+    <h1>Shopping Cart</h1>
+    <button (click)="checkoutClick()">Check Out</button>
+  </header>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cartItem of cartItems">
+        <td>{{ cartItem.book.id }}</td>
+        <td>{{ cartItem.book.title }}</td>
+        <td>{{ cartItem.book.author }}</td>
+        <td>
+          <img
+            src="{{ cartItem.book.img }}"
+            alt=""
+            *ngIf="cartItem.book.img"
+          /><fa-icon
+            class="default"
+            [icon]="faFileImage"
+            *ngIf="!cartItem.book.img"
+          ></fa-icon>
+        </td>
+        <td>{{ cartItem.book.price }}</td>
+        <td>
+          <div class="select">
+            <fa-icon [icon]="faMinus" (click)="minusClick(cartItem)"></fa-icon>
+            <input
+              disabled
+              name="quantity_{{ cartItem.book.id }}"
+              id="quantity_{{ cartItem.book.id }}"
+              [(ngModel)]="cartItem.quantity"
+              min="1"
+              max="15"
+            />
+            <fa-icon [icon]="faPlus" (click)="plusClick(cartItem)"></fa-icon>
+          </div>
+        </td>
+        <td>
+          <fa-icon
+            [icon]="faTrash"
+            class="icon"
+            (click)="deleteClick(cartItem)"
+          ></fa-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h1 *ngIf="noItems">No Items in Cart</h1>
+</div>

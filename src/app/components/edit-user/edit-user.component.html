@@ -1,0 +1,92 @@
+<app-nav class="nav" [admin]="currentUser.admin"></app-nav>
+<div class="container">
+  <header>
+    <h1>Edit User</h1>
+  </header>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-control">
+      <label for="firstName">First Name</label>
+      <div class="sub-group">
+        <input
+          #firstName
+          type="text"
+          name="firstName"
+          [(ngModel)]="user.firstName"
+          id="lastName"
+          disabled
+        />
+        <fa-icon
+          [icon]="faEdit"
+          (click)="firstName.disabled = !firstName.disabled"
+        ></fa-icon>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="lastName">Last Name</label>
+      <div class="sub-group">
+        <input
+          #lastName
+          type="text"
+          name="lastName"
+          [(ngModel)]="user.lastName"
+          id="lastName"
+          disabled
+        />
+        <fa-icon
+          [icon]="faEdit"
+          (click)="lastName.disabled = !lastName.disabled"
+        ></fa-icon>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="email">Email</label>
+      <div class="sub-group">
+        <input
+          #email
+          type="email"
+          name="email"
+          [(ngModel)]="user.email"
+          id="email"
+          disabled
+        />
+        <fa-icon
+          [icon]="faEdit"
+          (click)="email.disabled = !email.disabled"
+        ></fa-icon>
+      </div>
+    </div>
+    <div class="form-control">
+      <label for="password">Password</label>
+      <div class="sub-group">
+        <input
+          #password
+          type="password"
+          name="password"
+          [(ngModel)]="user.password"
+          id="password"
+          disabled
+        />
+        <fa-icon
+          [icon]="faEdit"
+          (click)="password.disabled = !password.disabled"
+        ></fa-icon>
+      </div>
+    </div>
+    <div class="form-control admin">
+      <label for="admin">Admin</label>
+      <input
+        #admin
+        type="checkbox"
+        name="admin"
+        [(ngModel)]="user.admin"
+        id="admin"
+        disabled
+      />
+      <fa-icon
+        [icon]="faEdit"
+        (click)="admin.disabled = !admin.disabled"
+      ></fa-icon>
+    </div>
+    <input type="submit" value="{{submitValue}}" />
+  </form>
+</div>

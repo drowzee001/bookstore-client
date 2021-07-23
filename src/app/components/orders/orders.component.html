@@ -1,0 +1,42 @@
+<app-nav class="nav" [admin]="currentUser.admin"></app-nav>
+<!-- <div class="container" id="loading" [hidden]="!loading">
+  <fa-icon [icon]="faLoad"></fa-icon>
+</div> -->
+<div class="container" *ngIf="!loading">
+  <header>
+    <h1>Order History</h1>
+  </header>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Number of Items</th>
+        <th>Order Total</th>
+        <th>Date Purchased</th>
+        <th>Order Details</th>
+        <th *ngIf="currentUser.admin">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.id }}</td>
+        <td>{{ order.items.length }}</td>
+        <td>${{ order.orderTotal }}</td>
+        <td>{{ timeFormat(order.created) }}</td>
+        <td>
+          <fa-icon
+            [icon]="faInfo"
+            routerLink="/orderDetails/{{ order.id }}"
+          ></fa-icon>
+        </td>
+        <td *ngIf="currentUser.admin">
+          <div class="delete" (click)="deleteClick(order)">
+            <p *ngIf="order.confirm">Confirm</p>
+            <fa-icon [icon]="order.confirm ? faCheck : faTrashAlt"></fa-icon>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h1 *ngIf="noOrders">No Orders</h1>
+</div>

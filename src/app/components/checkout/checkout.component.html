@@ -1,0 +1,44 @@
+<app-nav class="nav" [admin]="currentUser.admin"></app-nav>
+<div class="container" *ngIf="!loading">
+  <header>
+    <h1>Check Out</h1>
+    <h2>Order Summary</h2>
+  </header>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cartItem of cartItems">
+        <td>{{ cartItem.book.title }}</td>
+        <td>{{ cartItem.book.author }}</td>
+        <td>
+          <img
+            src="{{ cartItem.book.img }}"
+            alt=""
+            *ngIf="cartItem.book.img"
+          /><fa-icon
+            class="default"
+            [icon]="faFileImage"
+            *ngIf="!cartItem.book.img"
+          ></fa-icon>
+        </td>
+        <td>${{ cartItem.book.price }}</td>
+        <td>{{ cartItem.quantity }}</td>
+        <td>${{ cartItem.book.price * cartItem.quantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Subtotal: ${{ subtotal }}</p>
+  <p>Taxes & Fees: ${{ taxes }}</p>
+  <p>Shipping: ${{ shipping }}</p>
+  <p>Order Total: ${{ subtotal + taxes + shipping }}</p>
+  <button (click)="orderClick($event.target)">Order Now</button>
+</div>

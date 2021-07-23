@@ -1,0 +1,110 @@
+<app-nav class="nav" [admin]="currentUser.admin"></app-nav>
+<div class="message" *ngIf="message">
+  <p>{{ message }}</p>
+</div>
+<div class="container" *ngIf="!loading">
+  <header>
+    <h1>Book Collection</h1>
+    <!-- <input type="search" name="search" _id="search" placeholder="Search Books" /> -->
+
+    <button routerLink="/addBook" *ngIf="currentUser.admin">Add Book</button>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Image</th>
+        <th *ngIf="currentUser.admin">Date Added</th>
+        <th>Book Info</th>
+        <th *ngIf="currentUser.admin">Edit</th>
+        <th *ngIf="currentUser.admin">Delete</th>
+        <th *ngIf="!currentUser.admin">Quantity</th>
+        <th *ngIf="!currentUser.admin">Add to Cart</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{ book.title }}</td>
+        <td>{{ book.author }}</td>
+        <td>
+          <img [src]="book.img" alt="" *ngIf="book.img" />
+          <fa-icon
+            class="default"
+            [icon]="faFileImage"
+            *ngIf="!book.img"
+          ></fa-icon>
+        </td>
+        <td *ngIf="currentUser.admin">{{ timeFormat(book.created) }}</td>
+        <td>
+          <fa-icon
+            [icon]="faInfo"
+            class="large"
+            routerLink="/bookInfo/{{ book._id }}"
+          ></fa-icon>
+        </td>
+        <td *ngIf="currentUser.admin">
+          <fa-icon
+            class="icon"
+            [icon]="faEdit"
+            routerLink="/editBook/{{ book._id }}"
+          ></fa-icon>
+        </td>
+        <td *ngIf="currentUser.admin">
+          <fa-icon
+            class="icon"
+            [icon]="faTrashCan"
+            (click)="deleteClick(book._id)"
+          ></fa-icon>
+        </td>
+        <td>
+          <div class="select" *ngIf="!currentUser.admin">
+            <fa-icon [icon]="faMinus" (click)="minusClick(book)"></fa-icon>
+            <input
+              disabled
+              name="quantity_{{ book._id }}"
+              id="quantity_{{ book._id }}"
+              [(ngModel)]="book.quantity"
+              min="1"
+              max="15"
+            />
+            <fa-icon [icon]="faPlus" (click)="plusClick(book)"></fa-icon>
+          </div>
+        </td>
+        <td *ngIf="!currentUser.admin">
+          <div class="add" (click)="addClick(book)">
+            <p *ngIf="book.confirm">Confirm</p>
+            <fa-icon
+              class="icon"
+              [icon]="book.confirm ? faCheck : faAdd"
+            ></fa-icon>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="page-select" *ngIf="pages.length !== 0">
+    <fa-icon
+      [icon]="faBack"
+      (click)="loadPage(currentPage - 1)"
+      [ngClass]="{ disabled: currentPage == 1 }"
+    ></fa-icon>
+    <div *ngFor="let page of pages; let i = index">
+      <p
+        (click)="loadPage(i + 1)"
+        [ngClass]="{ selected: currentPage == i + 1 }"
+      >
+        {{ i + 1 }}
+      </p>
+    </div>
+    <fa-icon
+      [icon]="faNext"
+      (click)="loadPage(currentPage + 1)"
+      [ngClass]="{ disabled: currentPage == pages.length }"
+    ></fa-icon>
+  </div>
+  <div *ngIf="pages.length == 0">
+    <h1>No Books Found</h1>
+  </div>
+</div>

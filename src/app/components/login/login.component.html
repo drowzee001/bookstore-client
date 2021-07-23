@@ -1,0 +1,74 @@
+<div class="container">
+  <h1>Cosmic Bookstore</h1>
+  <form (ngSubmit)="loginSubmit()" [hidden]="!loginShow">
+    <div class="form-control">
+      <label for="emailLogin">Email</label>
+      <input
+        type="email"
+        name="emailLogin"
+        [(ngModel)]="email"
+        id="emailLogin"
+      />
+    </div>
+    <div class="form-control">
+      <label for="passwordLogin">Password</label>
+      <input
+        type="password"
+        name="passwordLogin"
+        [(ngModel)]="password"
+        id="passwordLogin"
+      />
+    </div>
+    <input type="submit" value="Login" />
+  </form>
+  <form (ngSubmit)="registerSubmit()" [hidden]="loginShow">
+    <div class="form-control">
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        name="firstName"
+        [(ngModel)]="firstName"
+        id="firstName"
+      />
+    </div>
+    <div class="form-control">
+      <label for="lastName">Last Name</label>
+      <input type="text" name="lastName" [(ngModel)]="lastName" id="lastName" />
+    </div>
+    <div class="form-control">
+      <label for="emailRegister">Email</label>
+      <input
+        type="email"
+        name="emailRegister"
+        [(ngModel)]="email"
+        id="emailRegister"
+      />
+    </div>
+    <div class="form-control">
+      <label for="passwordRegister">Password</label>
+      <input
+        type="password"
+        name="passwordRegister"
+        [(ngModel)]="password"
+        id="passwordRegister"
+      />
+    </div>
+    <div class="form-control">
+      <label for="passwordRegister">Confirm Password</label>
+      <input
+        type="password"
+        name="passwordConfirm"
+        [(ngModel)]="passwordConfirm"
+        id="passwordConfirm"
+      />
+    </div>
+    <input type="submit" value="Register" />
+  </form>
+  <br />
+  <p (click)="loginShow = false" class="register" [hidden]="!loginShow">
+    Don't have an account? Register here!
+  </p>
+  <p (click)="loginShow = true" class="register" [hidden]="loginShow">
+    Already have an account? Login here!
+  </p>
+</div>

@@ -1,0 +1,45 @@
+input {
+  width: 50px;
+  text-align: center;
+  outline: 0;
+}
+.large {
+  font-size: 35px;
+  cursor: pointer;
+}
+.select {
+  display: flex;
+  align-items: center;
+  margin: 0px 15px;
+}
+.select input {
+  margin: 0 25px;
+}
+.select fa-icon {
+  cursor: pointer;
+}
+.add {
+  cursor: pointer;
+}
+.page-select {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 100px;
+}
+.page-select p {
+  font-size: 30px;
+  margin: 0 15px;
+  cursor: pointer;
+}
+.selected {
+  cursor: default !important;
+  color: gray;
+}
+.page-select fa-icon {
+  font-size: 30px;
+  cursor: pointer;
+}
+.disabled {
+  cursor: default !important;
+  color: gray;
+}
