@@ -9,7 +9,7 @@ export class AuthService {
   public user: User;
   public token: string;
 
-  private apiUrl = 'http://localhost:3000/users';
+  private apiUrl = 'https://bookstore-server.donovanrowzee.net/users';
 
   constructor(private http: HttpClient) {}
 
