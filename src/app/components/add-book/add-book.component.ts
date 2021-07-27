@@ -61,7 +61,6 @@ export class AddBookComponent implements OnInit {
       newBook.img = this.url;
     }
     this.bookService.addBook(newBook).subscribe(() => {
-      console.log('test')
       this.router.navigate(['/books'], { replaceUrl: true });
     });
   }

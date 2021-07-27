@@ -17,6 +17,7 @@ export class OrderDetailsComponent implements OnInit {
   currentUser: User;
   order: Order;
   books: Book[] = [];
+  loading: boolean = true;
   faFileImage = faFileImage;
 
   constructor(
@@ -32,13 +33,15 @@ export class OrderDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.orderService.getOrder(params['id']).subscribe((order) => {
+        this.order = order[0];
         order[0].items.forEach((item) => {
-          this.order = order[0];
           this.bookService.getBook(item.book_id).subscribe((book) => {
-            book[0].quantity = item.quantity;
-            this.books.push(book[0]);
+            book.quantity = item.quantity;
+            this.books.push(book);
           });
         });
+      
+        this.loading = false;
       });
     });
   }
@@ -53,7 +56,7 @@ export class OrderDetailsComponent implements OnInit {
     });
   }
 
-  timeFormat(date: string): string {
-    return new Date(date).toDateString().toString();
+  timeFormat(date: Date): string {
+    return new Date(date).toDateString();
   }
 }

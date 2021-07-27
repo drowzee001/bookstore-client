@@ -90,7 +90,7 @@ export class BooksComponent implements OnInit {
 
   addCart(book: Book) {
     this.cartService
-      .getCartItem(book._id, this.currentUser.id)
+      .getCartItem(book._id)
       .subscribe((cartItem) => {
         if ((cartItem as any).length > 0) {
           if (
@@ -103,11 +103,11 @@ export class BooksComponent implements OnInit {
               } or fewer`
             );
           } else if (cartItem[0].quantity == 15) {
-            alert('Quantitiy Limit Reached');
+            alert('Quantity Limit Reached');
           } else {
             const updatedItem = {
-              id: cartItem[0].id,
-              user_id: this.currentUser.id,
+              _id: cartItem[0]._id,
+              user_id: this.currentUser._id,
               book_id: book._id,
               quantity: cartItem[0].quantity + book.quantity,
             };
@@ -122,7 +122,7 @@ export class BooksComponent implements OnInit {
           }
         } else {
           const newCartItem = {
-            user_id: this.currentUser.id,
+            user_id: this.currentUser._id,
             book_id: book._id,
             quantity: book.quantity,
           };

@@ -7,7 +7,6 @@
   <table>
     <thead>
       <tr>
-        <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
@@ -18,19 +17,19 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
-        <td>{{ user.id }}</td>
-        <td>{{ user.firstName }}</td>
-        <td>{{ user.lastName }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ timeFormat(user.created) }}</td>
-        <td>
+        <td class="fullName">{{ user.firstName }} {{ user.lastName }}</td>
+        <td class="firstName">{{ user.firstName }}</td>
+        <td class="lastName">{{ user.lastName }}</td>
+        <td class="email">{{ user.email }}</td>
+        <td class="date">{{ timeFormat(user.created) }}</td>
+        <td class="edit">
           <fa-icon
             class="icon"
             [icon]="faEdit"
-            routerLink="/editUser/{{ user.id }}"
+            routerLink="/editUser/{{ user._id }}"
           ></fa-icon>
         </td>
-        <td>
+        <td class="delete">
           <fa-icon
             class="icon"
             [icon]="faTrashCan"

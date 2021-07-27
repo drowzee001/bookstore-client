@@ -2,12 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../../User';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  }),
-};
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,24 +10,59 @@ const httpOptions = {
 export class UserService {
   private apiUrl = 'http://localhost:3000/users';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
+    const url = `${this.apiUrl}/all`;
+    return this.http.get<User[]>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 
   getUser(id: string): Observable<User> {
-    const url = `${this.apiUrl}/?id=${id}`;
-    return this.http.get<User>(url);
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<User>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 
   addUser(user: User): Observable<User> {
-    const url = `${this.apiUrl}/register`;
-    return this.http.post<User>(url, user, httpOptions);
+    const url = `${this.apiUrl}/`;
+    return this.http.post<User>(url, user, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 
-  deleteUser(User: User): Observable<User> {
-    const url = `${this.apiUrl}/${User.id}`;
-    return this.http.delete<User>(url);
+  editUser(user: User): Observable<User> {
+    const url = `${this.apiUrl}/edit`;
+    return this.http.post<User>(
+      url,
+      { user },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-auth-token': this.authService.token,
+        }),
+      }
+    );
+  }
+
+  deleteUser(user: User): Observable<User> {
+    const url = `${this.apiUrl}/${user._id}`;
+    return this.http.delete<User>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 }

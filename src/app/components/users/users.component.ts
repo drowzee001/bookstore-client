@@ -35,11 +35,12 @@ export class UsersComponent implements OnInit {
   addClick() {
     this.router.navigate(['/addUser']);
   }
+  
   deleteClick(user: User) {
     this.userService
       .deleteUser(user)
       .subscribe(
-        () => (this.users = this.users.filter((u) => u.id !== user.id))
+        () => (this.users = this.users.filter((u) => u._id !== user._id))
       );
   }
   timeFormat(date: string): string {

@@ -38,11 +38,11 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartService
-      .getCartItems(this.currentUser.id)
+      .getCartItems()
       .subscribe((cartItems) => {
         cartItems.forEach((cartItem) => {
           this.bookService.getBook(cartItem.book_id).subscribe((book) => {
-            cartItem.book = book[0];
+            cartItem.book = book;
             this.cartItems.push(cartItem);
             this.loading = false;
           });
@@ -64,7 +64,7 @@ export class CartComponent implements OnInit {
 
   deleteClick(cartItem: CartItem) {
     this.cartService.deleteCartItem(cartItem).subscribe(() => {
-      this.cartItems = this.cartItems.filter((c) => c.id !== cartItem.id);
+      this.cartItems = this.cartItems.filter((c) => c._id !== cartItem._id);
       if (this.cartItems.length == 0) {
         this.noItems = true;
       }
@@ -74,8 +74,8 @@ export class CartComponent implements OnInit {
   minusClick(cartItem: CartItem): void {
     if (cartItem.quantity > 1) {
       const updatedItem = {
-        id: cartItem.id,
-        user_id: this.currentUser.id,
+        _id: cartItem._id,
+        user_id: this.currentUser._id,
         book_id: cartItem.book._id,
         quantity: --cartItem.quantity,
       };
@@ -85,8 +85,8 @@ export class CartComponent implements OnInit {
   plusClick(cartItem: CartItem): void {
     if (cartItem.quantity < 15) {
       const updatedItem = {
-        id: cartItem.id,
-        user_id: this.currentUser.id,
+        _id: cartItem._id,
+        user_id: this.currentUser._id,
         book_id: cartItem.book._id,
         quantity: ++cartItem.quantity,
       };

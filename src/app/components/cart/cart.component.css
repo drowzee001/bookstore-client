@@ -14,3 +14,76 @@ input {
 .select fa-icon {
   cursor: pointer;
 }
+
+@media (max-width: 900px) {
+  h1 {
+    padding: 25px 0;
+  }
+  header {
+    padding: 0;
+  }
+  table {
+    width: 100%;
+    padding: 0;
+  }
+  thead {
+    visibility: collapse;
+  }
+  th {
+    margin: 0;
+    padding: 0;
+    font-size: 1px;
+    border: none;
+    overflow: hidden;
+  }
+  tr {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    padding: 15px 0;
+  }
+  tr:nth-of-type(2n) {
+    background-color: transparent;
+  }
+  tr:nth-of-type(2n + 1) {
+    background-color: #001c57;
+  }
+  td {
+    width: 100%;
+    padding: 15px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .title {
+    grid-row: 1 / 2;
+  }
+  .author {
+    grid-row: 2 / 3;
+  }
+  .img {
+    grid-row: 3 / 4;
+  }
+  .price {
+    grid-row: 4 / 5;
+    font-size: 26px;
+  }
+  .quantity {
+    grid-row: 5 / 6;
+  }
+  .delete {
+    grid-row: 6 / 7;
+  }
+  .select {
+    margin: 0;
+  }
+}
+@media (max-width: 576px) {
+  header {
+   flex-direction: column;
+   justify-content: center;
+   margin: 0;
+   padding: 0;
+   padding-bottom: 50px !important;
+ }
+}

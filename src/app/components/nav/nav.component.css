@@ -1,10 +1,12 @@
 .navbar {
   background-color: #001b3a;
-  height: 10vh;
+  height: 65px;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+}  
+.bars {
+  visibility: hidden;
 }
 ul {
   display: flex;
@@ -17,4 +19,25 @@ a {
   text-decoration: none;
   color: white;
   cursor: pointer;
+}
+@media (max-width: 576px) {
+  .navbar {
+    overflow: hidden;
+  }
+  .bars {
+    visibility: visible;
+    color: white;
+    font-size: 30px;
+    position: fixed;
+    top: 10px;
+    left: 50px;
+  }
+  ul {
+    display: block;
+    visibility: hidden;
+  }
+  li {
+    text-align: center;
+    padding: 15px;
+  }
 }

@@ -30,12 +30,6 @@
       "user_id": 1,
       "book_id": 4429,
       "quantity": 1
-    },
-    {
-      "id": 7415,
-      "user_id": 1,
-      "book_id": 4429,
-      "quantity": 1
     }
   ],
   "users": [

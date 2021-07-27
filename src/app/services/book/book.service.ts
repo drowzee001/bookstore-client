@@ -10,41 +10,73 @@ import { AuthService } from '../auth/auth.service';
 export class BookService {
   private apiUrl = 'http://localhost:3000/books';
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-auth-token': this.authService.token,
-    }),
-  };
-
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getBooks(page: number): Observable<Book[]> {
     const url = `${this.apiUrl}?page=${page}`;
-    return this.http.get<Book[]>(url, this.httpOptions);
+    return this.http.get<Book[]>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 
   getBooksCount(): Observable<number> {
     const url = `${this.apiUrl}/count`;
-    return this.http.get<number>(url, this.httpOptions);
+    return this.http.get<number>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 
   getBook(book_id: string) {
     const url = `${this.apiUrl}/${book_id}`;
-    return this.http.get<Book>(url, this.httpOptions);
+    return this.http.get<Book>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 
   addBook(book: Book): Observable<Book> {
-    return this.http.post<Book>(this.apiUrl, { book }, this.httpOptions);
+    console.log(book);
+    return this.http.post<Book>(
+      this.apiUrl,
+      { book },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-auth-token': this.authService.token,
+        }),
+      }
+    );
   }
 
   editBook(book: Book): Observable<Book> {
     const url = `${this.apiUrl}/edit`;
-    return this.http.post<Book>(url, { book }, this.httpOptions);
+    return this.http.post<Book>(
+      url,
+      { book },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-auth-token': this.authService.token,
+        }),
+      }
+    );
   }
 
   deleteBook(book_id: string): Observable<Book> {
     const url = `${this.apiUrl}/${book_id}`;
-    return this.http.delete<Book>(url, this.httpOptions);
+    return this.http.delete<Book>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 }

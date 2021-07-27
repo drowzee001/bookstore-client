@@ -2,36 +2,65 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from '../../Order';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  }),
-};
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  private apiUrl = 'http://localhost:5000/orders';
+  private apiUrl = 'http://localhost:3000/orders';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.apiUrl);
+    if (this.authService.user.admin) {
+      const url = `${this.apiUrl}/all`;
+      return this.http.get<Order[]>(url, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-auth-token': this.authService.token,
+        }),
+      });
+    } else {
+      return this.http.get<Order[]>(this.apiUrl, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-auth-token': this.authService.token,
+        }),
+      });
+    }
   }
 
   getOrder(id: string): Observable<Order> {
-    const url = `${this.apiUrl}/?id=${id}`;
-    return this.http.get<Order>(url);
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<Order>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 
   addOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(this.apiUrl, order, httpOptions);
+    return this.http.post<Order>(
+      this.apiUrl,
+      { order },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-auth-token': this.authService.token,
+        }),
+      }
+    );
   }
 
   deleteOrder(order: Order): Observable<Order> {
-    const url = `${this.apiUrl}/${order.id}`;
-    return this.http.delete<Order>(url);
+    const url = `${this.apiUrl}/${order._id}`;
+    return this.http.delete<Order>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 }

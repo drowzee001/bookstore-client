@@ -1,7 +1,87 @@
-fa-icon {
-  font-size: 35px;
-  cursor: pointer;
-}
-.delete {
-  cursor: pointer;
+@media (max-width: 875px) {
+  header {
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+  }
+  h1 {
+    padding: 25px 0;
+  }
+  table {
+    width: 100%;
+    padding: 0;
+  }
+  thead {
+    visibility: collapse;
+  }
+  th {
+    margin: 0;
+    padding: 0;
+    font-size: 1px;
+    border: none;
+    overflow: hidden;
+  }
+  tr {
+    display: grid;
+    height: 100%;
+    width: 100%;
+  }
+  tr:nth-of-type(2n) {
+    background-color: transparent;
+  }
+  tr:nth-of-type(2n + 1) {
+    background-color: #001c57;
+  }
+  tr {
+    grid-auto-columns: 1fr 1fr;
+    padding: 25px 0;
+  }
+  td {
+    width: 100%;
+    padding: 15px 5px;
+  }
+  .id {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+  }
+  .id:before {
+    content: "Order ID: \A";
+    white-space: pre;
+  }
+  .items {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+  }
+  .items:before {
+    content: "Total Items: \A";
+    white-space: pre;
+  }
+  .total {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+  }
+  .total:before {
+    content: "Total Price: \A";
+    white-space: pre;
+  }
+  .date {
+    grid-column: 1 / 3;
+    grid-row: 4 / 5;
+  }
+  .date:before {
+    content: "Date: \A";
+    white-space: pre;
+  }
+  .info {
+    padding: 15px;
+    grid-column: 1 / 2;
+    grid-row: 5 / 6;
+  }
+  .delete {
+    padding: 15px;
+    text-align: left;
+    grid-column: 2 / 3;
+    grid-row: 5 / 6;
+    padding-right: 25px;
+  }
 }

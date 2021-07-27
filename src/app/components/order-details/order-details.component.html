@@ -1,13 +1,12 @@
 <app-nav class="nav" [admin]="currentUser.admin"></app-nav>
-<div class="container">
+<div class="container" *ngIf="!loading">
   <header>
-    <h1>Order #{{ order.id }}</h1>
+    <h1>Order #{{ order._id }}</h1>
     <h2>Order Placed {{ timeFormat(order.created) }}</h2>
   </header>
   <table>
     <thead>
       <tr>
-        <th>ID</th>
         <th>Title</th>
         <th>Author</th>
         <th>Image</th>
@@ -18,25 +17,33 @@
     </thead>
     <tbody>
       <tr *ngFor="let book of books">
-        <td>{{ book.id }}</td>
-        <td>{{ book.title }}</td>
-        <td>{{ book.author }}</td>
-        <td>
+        <td class="title">{{ book.title }}</td>
+        <td class="author">{{ book.author }}</td>
+        <td class="img">
           <img src="{{ book.img }}" alt="" *ngIf="book.img" /><fa-icon
             class="default"
             [icon]="faFileImage"
             *ngIf="!book.img"
           ></fa-icon>
         </td>
-        <td>${{ book.price }}</td>
-        <td>{{ book.quantity }}</td>
-        <td>${{ book.price * book.quantity }}</td>
+        <td class="price">${{ book.price }}</td>
+        <td class="quantity">{{ book.quantity }}</td>
+        <td class="sum">${{ book.price * book.quantity }}</td>
       </tr>
     </tbody>
   </table>
-  <p>Subtotal: ${{ order.subtotal }}</p>
-  <p>Taxes & Fees: ${{ order.taxes }}</p>
-  <p>Shipping: ${{ order.shipping }}</p>
-  <p>Order Total: ${{ order.subtotal + order.taxes + order.shipping }}</p>
-  <button (click)="deleteClick($event.target)">Cancel Order</button>
+  <div
+    class="orderDetails"
+    [ngStyle]="{
+      'background-color': books.length % 2 == 0 ? '#001c57' : 'transparent'
+    }"
+  >
+    <br />
+    <h2>Order Summary</h2>
+    <p>Subtotal: ${{ order.subtotal }}</p>
+    <p>Taxes & Fees: ${{ order.taxes }}</p>
+    <p>Shipping: ${{ order.shipping }}</p>
+    <p>Order Total: ${{ order.subtotal + order.taxes + order.shipping }}</p>
+    <button (click)="deleteClick($event.target)">Cancel Order</button>
+  </div>
 </div>

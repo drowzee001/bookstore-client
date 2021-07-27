@@ -60,7 +60,7 @@ export class BookInfoComponent implements OnInit {
       target.textContent = 'Confirm';
     } else {
       this.cartService
-        .getCartItem(this.book._id, this.currentUser.id)
+        .getCartItem(this.book._id)
         .subscribe((cartItem) => {
           if ((cartItem as any).length > 0) {
             if (
@@ -76,8 +76,8 @@ export class BookInfoComponent implements OnInit {
               alert('Quantitiy Limit Reached');
             } else {
               const updatedItem = {
-                id: cartItem[0].id,
-                user_id: this.currentUser.id,
+                _id: cartItem[0]._id,
+                user_id: this.currentUser._id,
                 book_id: this.book._id,
                 quantity: cartItem[0].quantity + this.quantity,
               };
@@ -92,7 +92,7 @@ export class BookInfoComponent implements OnInit {
             }
           } else {
             const newCartItem = {
-              user_id: this.currentUser.id,
+              user_id: this.currentUser._id,
               book_id: this.book._id,
               quantity: this.quantity,
             };

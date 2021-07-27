@@ -2,42 +2,70 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CartItem } from '../../CartItem';
 import { Observable } from 'rxjs';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  }),
-};
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private apiUrl = 'http://localhost:5000/cartItems';
+  private apiUrl = 'http://localhost:3000/cartItems';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getCartItems(user_id: string): Observable<CartItem[]> {
-    const url = `${this.apiUrl}?user_id=${user_id}`;
-    return this.http.get<CartItem[]>(url);
+  getCartItems(): Observable<CartItem[]> {
+    const url = `${this.apiUrl}`;
+    return this.http.get<CartItem[]>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 
-  getCartItem(book_id: string, user_id: string): Observable<CartItem> {
-    const url = `${this.apiUrl}?user_id=${user_id}&book_id=${book_id}`;
-    return this.http.get<CartItem>(url);
+  getCartItem(book_id: string): Observable<CartItem[]> {
+    const url = `${this.apiUrl}/${book_id}`;
+    return this.http.get<CartItem[]>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 
   addCartItem(cartItem: CartItem): Observable<CartItem> {
-    return this.http.post<CartItem>(this.apiUrl, cartItem, httpOptions);
+    return this.http.post<CartItem>(
+      this.apiUrl,
+      { cartItem },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-auth-token': this.authService.token,
+        }),
+      }
+    );
   }
 
   deleteCartItem(CartItem: CartItem): Observable<CartItem> {
-    const url = `${this.apiUrl}/${CartItem.id}`;
-    return this.http.delete<CartItem>(url);
+    const url = `${this.apiUrl}/${CartItem._id}`;
+    return this.http.delete<CartItem>(url, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-auth-token': this.authService.token,
+      }),
+    });
   }
 
   updateQuantity(cartItem: CartItem) {
-    const url = `${this.apiUrl}/${cartItem.id}`;
-    return this.http.put<CartItem>(url, cartItem, httpOptions);
+    const url = `${this.apiUrl}/update`;
+    return this.http.post<CartItem>(
+      url,
+      { cartItem },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-auth-token': this.authService.token,
+        }),
+      }
+    );
   }
 }

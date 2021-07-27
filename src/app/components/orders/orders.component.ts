@@ -56,7 +56,7 @@ export class OrdersComponent implements OnInit {
     this.orderService
       .deleteOrder(order)
       .subscribe(
-        () => (this.orders = this.orders.filter((o) => o.id !== order.id))
+        () => (this.orders = this.orders.filter((o) => o._id !== order._id))
       );
   }
 

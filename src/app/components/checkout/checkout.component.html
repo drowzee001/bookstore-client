@@ -2,7 +2,7 @@
 <div class="container" *ngIf="!loading">
   <header>
     <h1>Check Out</h1>
-    <h2>Order Summary</h2>
+    <h2>Items</h2>
   </header>
   <table>
     <thead>
@@ -17,9 +17,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let cartItem of cartItems">
-        <td>{{ cartItem.book.title }}</td>
-        <td>{{ cartItem.book.author }}</td>
-        <td>
+        <td class="title">{{ cartItem.book.title }}</td>
+        <td class="author">{{ cartItem.book.author }}</td>
+        <td class="img">
           <img
             src="{{ cartItem.book.img }}"
             alt=""
@@ -30,15 +30,26 @@
             *ngIf="!cartItem.book.img"
           ></fa-icon>
         </td>
-        <td>${{ cartItem.book.price }}</td>
-        <td>{{ cartItem.quantity }}</td>
-        <td>${{ cartItem.book.price * cartItem.quantity }}</td>
+        <td class="price">${{ cartItem.book.price }}</td>
+        <td class="quantity">{{ cartItem.quantity }}</td>
+        <td class="sum">
+          ${{ formatNumber(cartItem.book.price * cartItem.quantity) }}
+        </td>
       </tr>
     </tbody>
   </table>
-  <p>Subtotal: ${{ subtotal }}</p>
-  <p>Taxes & Fees: ${{ taxes }}</p>
-  <p>Shipping: ${{ shipping }}</p>
-  <p>Order Total: ${{ subtotal + taxes + shipping }}</p>
-  <button (click)="orderClick($event.target)">Order Now</button>
+  <div
+    class="orderDetails"
+    [ngStyle]="{
+      'background-color': cartItems.length % 2 == 0 ? '#001c57' : 'transparent'
+    }"
+  >
+    <br />
+    <h2>Order Summary</h2>
+    <p>Subtotal: ${{ formatNumber(subtotal) }}</p>
+    <p>Taxes & Fees: ${{ taxes }}</p>
+    <p>Shipping: ${{ shipping }}</p>
+    <p>Order Total: ${{ formatNumber(subtotal + taxes + shipping) }}</p>
+    <button (click)="orderClick($event.target)">Order Now</button>
+  </div>
 </div>

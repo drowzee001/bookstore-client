@@ -24,10 +24,13 @@
   border-radius: 9999px;
   background-clip: padding-box;
 }
-
+html,
+body,
+.root {
+  height: 100%;
+}
 body {
   font-family: "Poppins", sans-serif;
-  height: 100%;
   background-color: #00316e;
   overflow: overlay;
 }
@@ -42,7 +45,7 @@ h2 {
 .container {
   color: white;
   text-align: center;
-  padding-top: 10vh;
+  padding-top: 65px;
   max-width: 1500px;
   margin: auto;
 }
@@ -50,6 +53,7 @@ h2 {
   position: fixed;
   left: 0;
   width: 100%;
+  z-index: 9999;
 }
 .message {
   position: fixed;
@@ -86,7 +90,7 @@ header {
   justify-content: space-between;
   align-items: center;
   margin: 0 50px;
-  padding: 50px 0;
+  padding: 25px 0;
 }
 input,
 button {
@@ -131,5 +135,5 @@ img {
 button {
   padding: 15px;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 20px;
 }

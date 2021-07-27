@@ -7,7 +7,6 @@
   <table>
     <thead>
       <tr>
-        <th>ID</th>
         <th>Title</th>
         <th>Author</th>
         <th>Image</th>
@@ -18,10 +17,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let cartItem of cartItems">
-        <td>{{ cartItem.book.id }}</td>
-        <td>{{ cartItem.book.title }}</td>
-        <td>{{ cartItem.book.author }}</td>
-        <td>
+        <td class="title">{{ cartItem.book.title }}</td>
+        <td class="author">{{ cartItem.book.author }}</td>
+        <td class="img">
           <img
             src="{{ cartItem.book.img }}"
             alt=""
@@ -32,14 +30,14 @@
             *ngIf="!cartItem.book.img"
           ></fa-icon>
         </td>
-        <td>{{ cartItem.book.price }}</td>
-        <td>
+        <td class="price">${{ cartItem.book.price }}</td>
+        <td class="quantity">
           <div class="select">
             <fa-icon [icon]="faMinus" (click)="minusClick(cartItem)"></fa-icon>
             <input
               disabled
-              name="quantity_{{ cartItem.book.id }}"
-              id="quantity_{{ cartItem.book.id }}"
+              name="quantity_{{ cartItem.book._id }}"
+              id="quantity_{{ cartItem.book._id }}"
               [(ngModel)]="cartItem.quantity"
               min="1"
               max="15"
@@ -47,7 +45,7 @@
             <fa-icon [icon]="faPlus" (click)="plusClick(cartItem)"></fa-icon>
           </div>
         </td>
-        <td>
+        <td class="delete">
           <fa-icon
             [icon]="faTrash"
             class="icon"

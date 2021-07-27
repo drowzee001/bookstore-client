@@ -1,11 +1,14 @@
-header{
+.container {
+  padding-left: 75px;
+  padding-right: 75px;
+}
+header {
   justify-content: center;
 }
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 50px;
 }
 .form-control {
   display: flex;
@@ -14,7 +17,6 @@ form {
   width: 100%;
   max-width: 500px;
   text-align: center;
-  z-index: -1;
 }
 input,
 textarea,

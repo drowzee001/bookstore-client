@@ -46,10 +46,13 @@ export class LoginComponent implements OnInit {
       alert('Please enter a password');
       return;
     }
-    this.authService.login(this.email, this.password).subscribe((res) => {
-      this.authService.storeUserData(res['token'], res['user']);
-      this.router.navigate([this.returnUrl]);
-    });
+    this.authService.login(this.email, this.password).subscribe(
+      (res) => {
+        this.authService.storeUserData(res['token'], res['user']);
+        this.router.navigate([this.returnUrl]);
+      },
+      (err) => alert(err.error.msg)
+    );
   }
 
   registerSubmit() {
@@ -82,11 +85,13 @@ export class LoginComponent implements OnInit {
       admin: false,
     };
 
-    this.authService.register(newUser).subscribe((res) => {
-      console.log(res);
-      this.authService.storeUserData(res['token'], res['user']);
-      this.router.navigate([this.returnUrl]);
-    });
+    this.authService.register(newUser).subscribe(
+      (res) => {
+        this.authService.storeUserData(res['token'], res['user']);
+        this.router.navigate([this.returnUrl]);
+      },
+      (err) => alert(err.error.msg)
+    );
   }
 
   goToRegister() {}

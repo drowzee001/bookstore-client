@@ -1,14 +1,103 @@
 header {
-    text-align: left;
-    flex-direction: column;
+  text-align: left;
+  flex-direction: column;
 }
 h1 {
-    padding-bottom: 50px;
+  padding-bottom: 25px 0;
 }
 p {
-    padding: 15px;
+  padding: 15px;
 }
 button {
-    margin: 100px;
-    width: 50%;
+  margin: 50px 0 75px 0;
+  width: 50%;
+}
+@media (max-width: 800px) {
+
+  table {
+    width: 100%;
+    padding: 0;
+  }
+  thead {
+    visibility: collapse;
+  }
+  th {
+    margin: 0;
+    padding: 0;
+    font-size: 1px;
+    border: none;
+    overflow: hidden;
+  }
+  tr {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    padding: 15px 0;
+  }
+  tr:nth-of-type(2n) {
+    background-color: transparent;
+  }
+  tr:nth-of-type(2n + 1) {
+    background-color: #001c57;
+  }
+  td {
+    width: 100%;
+    padding: 15px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .title {
+    grid-row: 1 / 2;
+  }
+  .author {
+    grid-row: 2 / 3;
+  }
+  .img {
+    grid-row: 3 / 4;
+  }
+  .price {
+    grid-row: 4 / 5;
+  }
+  .price::before {
+      content: 'Unit Price: \A';
+      white-space: pre;
+  }
+  .quantity {
+    grid-row: 5 / 6;
+  }
+  .quantity::before {
+      content: 'Quantity: \A';
+      white-space: pre;
+  }
+  .sum {
+    grid-row: 6 / 7;
+  }
+  .sum::before {
+      content: 'Total: \A';
+      white-space: pre;
+  }
+  .info,
+  .add,
+  .edit,
+  .delete {
+    grid-row: 7 / 8;
+    width: 100%;
+  }
+  .info {
+    justify-content: flex-end;
+    padding-right: 25px;
+  }
+  .delete,
+  .add {
+    justify-content: flex-start;
+    padding-left: 25px;
+    height: 150px;
+  }
+  .select {
+    margin: 0;
+  }
+  .page-select {
+    padding-top: 25px;
+  }
 }

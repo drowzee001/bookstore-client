@@ -21,14 +21,17 @@
         <th *ngIf="currentUser.admin">Edit</th>
         <th *ngIf="currentUser.admin">Delete</th>
         <th *ngIf="!currentUser.admin">Quantity</th>
+        <th>Price</th>
         <th *ngIf="!currentUser.admin">Add to Cart</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let book of books">
-        <td>{{ book.title }}</td>
-        <td>{{ book.author }}</td>
-        <td>
+      <tr *ngFor="let book of books" [ngStyle]="{
+        'grid-template-columns': currentUser.admin ? '1fr 2fr 1fr' : '1fr 1fr'
+      }">
+        <td class="title">{{ book.title }}</td>
+        <td class="author">{{ book.author }}</td>
+        <td class="img">
           <img [src]="book.img" alt="" *ngIf="book.img" />
           <fa-icon
             class="default"
@@ -36,30 +39,30 @@
             *ngIf="!book.img"
           ></fa-icon>
         </td>
-        <td *ngIf="currentUser.admin">{{ timeFormat(book.created) }}</td>
-        <td>
+        <td class="date" *ngIf="currentUser.admin">{{ timeFormat(book.created) }}</td>
+        <td class="info">
           <fa-icon
             [icon]="faInfo"
             class="large"
             routerLink="/bookInfo/{{ book._id }}"
           ></fa-icon>
         </td>
-        <td *ngIf="currentUser.admin">
+        <td class="edit" *ngIf="currentUser.admin">
           <fa-icon
             class="icon"
             [icon]="faEdit"
             routerLink="/editBook/{{ book._id }}"
           ></fa-icon>
         </td>
-        <td *ngIf="currentUser.admin">
+        <td class="delete" *ngIf="currentUser.admin">
           <fa-icon
             class="icon"
             [icon]="faTrashCan"
             (click)="deleteClick(book._id)"
           ></fa-icon>
         </td>
-        <td>
-          <div class="select" *ngIf="!currentUser.admin">
+        <td class="quantity" *ngIf="!currentUser.admin">
+          <div class="select">
             <fa-icon [icon]="faMinus" (click)="minusClick(book)"></fa-icon>
             <input
               disabled
@@ -72,8 +75,9 @@
             <fa-icon [icon]="faPlus" (click)="plusClick(book)"></fa-icon>
           </div>
         </td>
-        <td *ngIf="!currentUser.admin">
-          <div class="add" (click)="addClick(book)">
+        <td class="price">${{ book.price }}</td>
+        <td class="add" *ngIf="!currentUser.admin">
+          <div class="addOption" (click)="addClick(book)">
             <p *ngIf="book.confirm">Confirm</p>
             <fa-icon
               class="icon"

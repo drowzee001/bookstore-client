@@ -1,12 +1,18 @@
-<div class="navbar">
-  <ul *ngIf="admin">
+<div class="navbar" [@openClose]="isOpen ? 'open' : 'closed'">
+  <fa-icon
+    class="bars"
+    [icon]="faBars"
+    (click)="menu()"
+    [@openClose3]="isOpen ? 'open' : 'closed'"
+  ></fa-icon>
+  <ul *ngIf="admin" [@openClose2]="isOpen ? 'open' : 'closed'">
     <li><a routerLink="/welcome">Home</a></li>
     <li><a routerLink="/users">Users</a></li>
     <li><a routerLink="/orders">Orders</a></li>
     <li><a routerLink="/books">Books</a></li>
     <li><a (click)="logout()">Logout</a></li>
   </ul>
-  <ul *ngIf="!admin">
+  <ul *ngIf="!admin" [@openClose2]="isOpen ? 'open' : 'closed'">
     <li><a routerLink="/welcome">Home</a></li>
     <li><a routerLink="/books">Books</a></li>
     <li><a routerLink="/orders">My Orders</a></li>

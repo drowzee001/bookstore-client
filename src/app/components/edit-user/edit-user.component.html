@@ -1,5 +1,5 @@
 <app-nav class="nav" [admin]="currentUser.admin"></app-nav>
-<div class="container">
+<div class="container" *ngIf="!loading">
   <header>
     <h1>Edit User</h1>
   </header>
@@ -12,7 +12,7 @@
           type="text"
           name="firstName"
           [(ngModel)]="user.firstName"
-          id="lastName"
+          id="firstName"
           disabled
         />
         <fa-icon
@@ -87,6 +87,6 @@
         (click)="admin.disabled = !admin.disabled"
       ></fa-icon>
     </div>
-    <input type="submit" value="{{submitValue}}" />
+    <input type="submit" value="{{ submitValue }}" />
   </form>
 </div>

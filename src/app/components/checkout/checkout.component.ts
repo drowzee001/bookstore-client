@@ -34,42 +34,47 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cartService
-      .getCartItems(this.currentUser.id)
-      .subscribe((cartItems) => {
-        cartItems.forEach((cartItem) => {
-          this.bookService.getBook(cartItem.book_id).subscribe((book) => {
-            cartItem.book = book[0];
-            this.cartItems.push(cartItem);
-            this.subtotal += book[0].price * cartItem.quantity;
-            this.subtotal = parseFloat(this.subtotal.toFixed(2));
-            this.loading = false;
-          });
+    this.cartService.getCartItems().subscribe((cartItems) => {
+      cartItems.forEach((cartItem) => {
+        this.bookService.getBook(cartItem.book_id).subscribe((book) => {
+          cartItem.book = book;
+          this.cartItems.push(cartItem);
+          this.subtotal += +book.price * cartItem.quantity;
+          this.subtotal = parseFloat(this.subtotal.toFixed(2));
+          this.loading = false;
         });
       });
+    });
   }
+
+  formatNumber(num: Number): String {
+    return num.toFixed(2);
+  }
+
   orderClick(target): void {
-    if ((target.innerText == 'Order Now')) {
+    if (target.innerText == 'Order Now') {
       target.textContent = 'Confirm';
       return;
     }
     var items = [];
     this.cartItems.forEach((cartItem) => {
       items.push({
-        id: cartItem.id,
+        id: cartItem._id,
         user_id: cartItem.user_id,
         book_id: cartItem.book_id,
         quantity: cartItem.quantity,
       });
     });
     const newOrder = {
-      user_id: this.currentUser.id,
+      user_id: this.currentUser._id,
       items: items,
       subtotal: this.subtotal,
       taxes: this.taxes,
       shipping: this.shipping,
-      orderTotal: this.subtotal + this.taxes + this.shipping,
-      created: new Date().toString(),
+      orderTotal: parseFloat(
+        (this.subtotal + this.taxes + this.shipping).toFixed(2)
+      ),
+      created: new Date(),
     };
     this.orderService.addOrder(newOrder).subscribe(() => {
       this.cartItems.forEach((item) => {

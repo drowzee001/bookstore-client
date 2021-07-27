@@ -15,6 +15,7 @@ export class EditUserComponent implements OnInit {
   currentUser: User;
   faEdit = faEdit;
   submitValue: string = 'Update';
+  loading: boolean = true;
 
   constructor(
     private userService: UserService,
@@ -28,7 +29,9 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.userService.getUser(params['id']).subscribe((user) => {
-        this.user = user[0];
+        this.user = user;
+        this.user.password = 'thisisaplaceholder';
+        this.loading = false;
       });
     });
   }
@@ -51,10 +54,11 @@ export class EditUserComponent implements OnInit {
       this.submitValue = 'Confirm';
       return;
     }
-    this.userService.deleteUser(this.user).subscribe(() => {
-      this.userService.addUser(this.user).subscribe(() => {
-        this.router.navigate(['/users'], { replaceUrl: true });
-      });
+    if (this.user.password == 'thisisaplaceholder') {
+      this.user.password = undefined;
+    }
+    this.userService.editUser(this.user).subscribe(() => {
+      this.router.navigate(['/users'], { replaceUrl: true });
     });
   }
 }
