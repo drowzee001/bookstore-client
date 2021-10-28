@@ -9,7 +9,7 @@ export class AuthService {
   public user: User;
   public token: string;
 
-  private apiUrl = 'https://bookstore-server.donovanrowzee.net/users';
+  private apiUrl = 'https://angular-bookstore-server.herokuapp.com/users';
 
   constructor(private http: HttpClient) {}
 
