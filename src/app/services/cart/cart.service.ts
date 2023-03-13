@@ -8,7 +8,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root',
 })
 export class CartService {
-  private apiUrl = 'https://angular-bookstore-server.herokuapp.com/cartItems';
+  private apiUrl = 'https://angular-bookstore-server.onrender.com/cartItems';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
