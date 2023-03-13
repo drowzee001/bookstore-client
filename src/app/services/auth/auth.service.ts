@@ -9,7 +9,7 @@ export class AuthService {
   public user: User;
   public token: string;
 
-  private apiUrl = 'https://angular-bookstore-server.onrender.com/users';
+  private apiUrl = 'https://bookstore.donovanrowzee.com/users';
 
   constructor(private http: HttpClient) {}
 
