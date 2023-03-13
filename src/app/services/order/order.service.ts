@@ -8,7 +8,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root',
 })
 export class OrderService {
-  private apiUrl = 'https://angular-bookstore-server.onrender.com/orders';
+  private apiUrl = 'https://bookstore.donovanrowzee.com/orders';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
