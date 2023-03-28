@@ -8,7 +8,8 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root',
 })
 export class CartService {
-  private apiUrl = 'https://bookstore.donovanrowzee.com/cartItems';
+  //private apiUrl = 'https://bookstore.donovanrowzee.com/cartItems';
+  private apiUrl = 'http://localhost:3000/cartItems';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
